@@ -69,6 +69,39 @@
   [s]
   (interleave s s))
 
+; Problema 5
+
+; Versión recursiva
+;(defn fib
+;  [n]
+;  (if (<= n 1)
+;    n
+;    (+ (fib (- n 1))
+;       (fib (- n 2)))))
+
+; Versión loop/recur
+;(defn fib
+;  [n]
+;  (loop [a 0
+;         b 1
+;         i 0]
+;    (if (= i n)
+;      a
+;      (recur b
+;             (+' a b)
+;             (inc i)))))
+
+(defn aux
+  [[a b]]
+  [b (+' a b)])
+
+
+; Versión API de secuencias
+(defn fib
+  [n]
+  (first (first (drop n
+                      (iterate aux [0 1])))))
+
 (deftest test-enlist
   (is (= () (enlist ())))
   (is (= '((a) (b) (c)) (enlist '(a b c))))
@@ -97,5 +130,20 @@
          (duplicate '(a))))
   (is (= '(a a b b c c d d e e f f g g h h)
          (duplicate '(a b c d e f g h)))))
+
+(deftest test-fib
+  (is (= 0
+         (fib 0)))
+  (is (= 1
+         (fib 1)))
+  (is (= 1
+         (fib 2)))
+  (is (= 5
+         (fib 5)))
+  (is (= [0 1 1 2 3 5 8 13 21 34 55 89 144 233 377 610
+          987 1597 2584 4181 6765]
+         (map fib (range 21))))
+  (is (= 267914296
+         (fib 42))))
 
 (run-tests)
