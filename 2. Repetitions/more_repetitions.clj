@@ -50,11 +50,32 @@
 ; Versión API de secuencias
 (defn insertion-sort
   [s]
-  (reduce (fn [accum n] (insert n accum))
-          ()
-          s))
+  (reduce #(insert %2 %1) () s))
 
-(insertion-sort '(5 1 9 2 7 6))
+; Problema 5
+
+; Versión loop/recur
+;(defn binary
+;  [n]
+;  (loop [new-n   n
+;         result  ()]
+;    (if (zero? new-n)
+;      result
+;      (recur (quot new-n 2)
+;             (cons (rem new-n 2) result)))))
+
+; Versión API de secuencias
+(defn binary
+  [n]
+  (second
+    (first
+      (drop-while
+        (fn [[n _result]]
+          (not (zero? n)))
+        (iterate (fn [[n result]]
+                   [(quot n 2)
+                    (cons (rem n 2) result)])
+                 [n ()])))))
 
 (deftest test-expand
   (is (= () (expand ())))
@@ -75,5 +96,10 @@
          (insertion-sort '(4 3 6 8 3 0 9 1 7))))
   (is (= '(1 2 3 4 5 6) (insertion-sort '(1 2 3 4 5 6))))
   (is (= '(1 5 5 5 5 5 5) (insertion-sort '(5 5 5 1 5 5 5)))))
+
+(deftest test-binary
+  (is (= () (binary 0)))
+  (is (= '(1 1 1 1 0) (binary 30)))
+  (is (= '(1 0 1 1 0 0 0 0 0 1 0 0 0 0 1 1) (binary 45123))))
 
 (run-tests)
