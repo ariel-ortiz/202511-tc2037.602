@@ -77,6 +77,28 @@
                     (cons (rem n 2) result)])
                  [n ()])))))
 
+; Problema 6
+(defn prime-factors
+  [n]
+  (loop [new-n   n
+         r       []
+         divisor 2]
+    (cond
+      (= new-n 1)                 (concat r ())
+
+      (zero? (rem new-n divisor)) (recur (quot new-n divisor)
+                                         (conj r divisor)
+                                         divisor)
+
+      :else                       (recur new-n
+                                         r
+                                         (inc divisor)))))
+
+; Problema 10
+(defn pack
+  [s]
+  (partition-by identity s))
+
 (deftest test-expand
   (is (= () (expand ())))
   (is (= '(a) (expand '(a))))
@@ -101,5 +123,19 @@
   (is (= () (binary 0)))
   (is (= '(1 1 1 1 0) (binary 30)))
   (is (= '(1 0 1 1 0 0 0 0 0 1 0 0 0 0 1 1) (binary 45123))))
+
+(deftest test-prime-factors
+  (is (= () (prime-factors 1)))
+  (is (= '(2 3) (prime-factors 6)))
+  (is (= '(2 2 2 2 2 3) (prime-factors 96)))
+  (is (= '(97) (prime-factors 97)))
+  (is (= '(2 3 3 37) (prime-factors 666))))
+
+(deftest test-pack
+  (is (= () (pack ())))
+  (is (= '((a a a a) (b) (c c) (a a) (d) (e e e e))
+         (pack '(a a a a b c c a a d e e e e))))
+  (is (= '((1) (2) (3) (4) (5)) (pack '(1 2 3 4 5))))
+  (is (= '((9 9 9 9 9 9 9 9 9)) (pack '(9 9 9 9 9 9 9 9 9)))))
 
 (run-tests)
