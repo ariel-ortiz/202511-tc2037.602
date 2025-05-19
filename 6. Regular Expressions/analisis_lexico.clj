@@ -45,5 +45,20 @@
   [file-name]
   (tokenize (slurp file-name)))
 
+(defn separador
+  []
+  (println (apply str (repeat 56 \=))))
 
-(tokenize-file "entrada.txt")
+(def termino {:flotante       "Flotante"
+              :entero         "Entero"
+              :comentario     "Comentario"
+              :variable       "Variable"
+              :asignacion     "Asignación"
+              :suma           "Suma"
+              :resta          "Resta"
+              :multiplicacion "Multiplicación"
+              :division       "División"
+              :potencia       "Potencia"
+              :par-izq        "Paréntesis que abre"
+              :par-der        "Paréntesis que cierra"
+              :error          "Carácter inválido"})
