@@ -74,4 +74,5 @@
                      (termino (token 0)))))
   (separador))
 
-(print-table "entrada.txt")
+(spit "salida.txt"
+      (with-out-str (print-table "entrada.txt")))
