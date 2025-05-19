@@ -74,5 +74,30 @@
                      (termino (token 0)))))
   (separador))
 
-(spit "salida.txt"
-      (with-out-str (print-table "entrada.txt")))
+;(spit "salida.txt"
+;      (with-out-str (print-table "entrada.txt"))))
+
+(defn htmlize
+  [lst]
+  (map (fn [[t v]]
+         (format "<tr>
+                    <td class=\"%s\">%s</td>
+                    <td>%s</td>
+                  </tr>
+                 "
+                 (symbol t)
+                 v
+                 (termino t)))
+       lst))
+
+(def html-template (slurp "template.html"))
+
+(defn txt->html
+  [in-name out-name]
+  (let [file-content (slurp in-name)]
+    (spit out-name
+          (format html-template
+                  file-content
+                  (apply str (htmlize (tokenize file-content)))))))
+
+(txt->html "entrada.txt" "salida.html")
