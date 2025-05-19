@@ -62,3 +62,16 @@
               :par-izq        "Paréntesis que abre"
               :par-der        "Paréntesis que cierra"
               :error          "Carácter inválido"})
+
+(defn print-table
+  [file-name]
+  (separador)
+  (println (format "%-32sTipo" "Token"))
+  (separador)
+  (doseq [token (tokenize-file file-name)]
+    (println (format "%-32s%s"
+                     (token 1)
+                     (termino (token 0)))))
+  (separador))
+
+(print-table "entrada.txt")
