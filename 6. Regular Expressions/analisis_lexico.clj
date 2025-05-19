@@ -39,6 +39,11 @@
                      (token 11) [:par-izq (token 0)]
                      (token 12) [:par-der (token 0)]
                      (token 14) [:error (token 0)]))
-               input)))
+               (re-seq er input))))
 
-(tokenize (re-seq er (slurp "entrada.txt")))
+(defn tokenize-file
+  [file-name]
+  (tokenize (slurp file-name)))
+
+
+(tokenize-file "entrada.txt")
