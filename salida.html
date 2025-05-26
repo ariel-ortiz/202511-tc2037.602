@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+
+<html lang="es">
+
+<head>
+    <meta charset="utf-8">
+    <title>Análisis Léxico</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+
+<h1>Entrada original</h1>
+<pre>b=7
+
+a = 32.4 *(-8.6 - b)/       6.1E-8
+
+d = a ^ b // Esto es un comentario
+$
+</pre>
+
+<h1>Análisis léxico</h1>
+<table>
+    <tr>
+        <th>Token</th>
+        <th>Tipo</th>
+    </tr>
+    <tr>
+                    <td class="variable">b</td>
+                    <td>Variable</td>
+                  </tr>
+                 <tr>
+                    <td class="asignacion">=</td>
+                    <td>Asignación</td>
+                  </tr>
+                 <tr>
+                    <td class="entero">7</td>
+                    <td>Entero</td>
+                  </tr>
+                 <tr>
+                    <td class="variable">a</td>
+                    <td>Variable</td>
+                  </tr>
+                 <tr>
+                    <td class="asignacion">=</td>
+                    <td>Asignación</td>
+                  </tr>
+                 <tr>
+                    <td class="flotante">32.4</td>
+                    <td>Flotante</td>
+                  </tr>
+                 <tr>
+                    <td class="multiplicacion">*</td>
+                    <td>Multiplicación</td>
+                  </tr>
+                 <tr>
+                    <td class="par-izq">(</td>
+                    <td>Paréntesis que abre</td>
+                  </tr>
+                 <tr>
+                    <td class="flotante">-8.6</td>
+                    <td>Flotante</td>
+                  </tr>
+                 <tr>
+                    <td class="resta">-</td>
+                    <td>Resta</td>
+                  </tr>
+                 <tr>
+                    <td class="variable">b</td>
+                    <td>Variable</td>
+                  </tr>
+                 <tr>
+                    <td class="par-der">)</td>
+                    <td>Paréntesis que cierra</td>
+                  </tr>
+                 <tr>
+                    <td class="division">/</td>
+                    <td>División</td>
+                  </tr>
+                 <tr>
+                    <td class="flotante">6.1E-8</td>
+                    <td>Flotante</td>
+                  </tr>
+                 <tr>
+                    <td class="variable">d</td>
+                    <td>Variable</td>
+                  </tr>
+                 <tr>
+                    <td class="asignacion">=</td>
+                    <td>Asignación</td>
+                  </tr>
+                 <tr>
+                    <td class="variable">a</td>
+                    <td>Variable</td>
+                  </tr>
+                 <tr>
+                    <td class="potencia">^</td>
+                    <td>Potencia</td>
+                  </tr>
+                 <tr>
+                    <td class="variable">b</td>
+                    <td>Variable</td>
+                  </tr>
+                 <tr>
+                    <td class="comentario">// Esto es un comentario</td>
+                    <td>Comentario</td>
+                  </tr>
+                 <tr>
+                    <td class="error">$</td>
+                    <td>Carácter inválido</td>
+                  </tr>
+                 
+</table>
+
+</body>
+
+</html>
