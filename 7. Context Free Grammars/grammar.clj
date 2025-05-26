@@ -66,4 +66,25 @@
   (is (fails? (palindrome "1010011010")))
   (is (fails? (palindrome "111111111111111111110"))))
 
+;; Problema 3
+
+(def balanced-parentheses (parser "
+  P =   epsilon
+      | '(' P ')' P
+"))
+
+(deftest test-balanced-parentheses
+  (is (succeeds? (balanced-parentheses "")))
+  (is (succeeds? (balanced-parentheses "()")))
+  (is (succeeds? (balanced-parentheses "((((()))))")))
+  (is (succeeds? (balanced-parentheses "()()()()()")))
+  (is (succeeds? (balanced-parentheses
+                   "(()()())((())(()()()))(((())))")))
+  (is (fails? (balanced-parentheses "(")))
+  (is (fails? (balanced-parentheses ")")))
+  (is (fails? (balanced-parentheses "((((())))")))
+  (is (fails? (balanced-parentheses "))))((((")))
+  (is (fails? (balanced-parentheses
+                "(()()())((())(()()()))((((())))"))))
+
 (run-tests)
